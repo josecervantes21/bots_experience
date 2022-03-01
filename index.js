@@ -1,47 +1,42 @@
-const { Client, Intents } = require('discord.js');
+const { Client, Intents, } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-
 client.on('ready',()=>{
     console.log(`Bot is ready as: ${client.user.tag}`);
 });
+var basededatos=[]
 client.on("message", message=>{
     console.log(message);
     if (message.content ==='Hola'){
-        message.reply(`Hola ${message.author},¿Como te sentiste en tú curso?`)
-        message.reply('1. Aprendi mucho')
-        message.reply('2. Aprendí lo suficiente')
-        message.reply('3. Aprendi')
-        message.reply('4. No aprendi mucho')
-        message.reply('5. Necesito aprender más')
+        message.reply(`Hola ${message.author},¿De que forma te gusta aprender?`)
+        client.on("message", message=>{
+            if (message.content ==='teoria'){
+                message.reply('A que hora te estas disponible?')
+                message.reply('6pm, 7pm, 8pm')
+                client.on("message", message=>{
+                    if (message.content ==='6pm'){
+                        var seis=message.author
+                        message.reply(`Si me entero de alguien con quien seas un buen learning match te lo haré saber.${seis}`)
+                        basededatos.push(seis)
+                        client.on("message", message=>{
+                            if (message.content ==='hi'){
+                                for (let i = 0; i < basededatos.length; i++) {
+                                    if(i > 1){
+                                        message.reply(`Hey mira lo que encontré, ${basededatos} disfruta aprender por medio de -retos-, lo cual empata muy bien contigo. Podrían juntarse a las -6:00 pm- a -hacer retos en code wars-.`)
+                                    }
+                                    else if(i < 1){
+                                        message.reply(`${basededatos}`)
+                                    }
+                                }
+                            }
+                        })
+                    }
+                })
+            }
+        })
+        
     }
-    if (message.content==='1'){
-        message.reply('Bien, ¿Te gusta aprender por retos?')
-    }
-    else if (message.content==='2'){
-        message.reply('Bien, ¿Te gusta aprender por retos?')
-    }
-    else if (message.content==='3'){
-        message.reply('Bien, ¿Te gusta aprender por retos?')
-    }
-    else if (message.content==='4'){
-        message.reply('Bien, ¿Te gusta aprender por teoria?')
-    }
-    else if (message.content==='5'){
-        message.reply('Bien, ¿Te gusta aprender por teoria?')
-    }
+    
 })
-client.on("message", message=>{
-    console.log(message);
-    if(message.content ==='si'){
-        message.reply('grupo 3')
-    }
-    else if(message.content ==='no'){
-        message.reply('grupo 4')
-    }
-})
-client.login('OTQ1MTkzNTM1NDgzODMwMzMy.YhMmEw.CODkHQkB95jzgO6M3i2vVhgHlyQ');
 
-var grupo1='Los que aprenden por retos y no entendieron'
-var grupo2='Los que aprenden por teoria y si entendieron'
-var grupo3='Los que aprenden por retos y entendieron'
-var grupo4='Los que aprenden por teoria y no entendieron'
+
+client.login('OTQ1MTkzNTM1NDgzODMwMzMy.YhMmEw.OIke_btFNwUInGPlutJ7UDuNf9s');
